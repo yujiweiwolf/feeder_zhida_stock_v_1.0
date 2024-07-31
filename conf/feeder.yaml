@@ -1,0 +1,32 @@
+feeder:
+  push_address: tcp://*:8000
+  sub_date: 0
+  sub_time: 0
+  wal: wal:///../data/feed.stock.wal?keep=100
+  enable_trace: true
+  enable_spot: true
+  enable_future: true
+  enable_option: true
+  enable_order: false
+  enable_knock: false
+  enable_queue: false
+  holo_sz_cycle: 0
+  holo_sh_cycle: 0
+  holo_threads: 0
+
+# 生产帐号，无测试帐号
+daapi:
+  serveraddress: tcp://222.73.119.230:9440
+  userid: MK00000022
+  password: .pftz123123
+  heartbeat: 20
+  authorcode: porl99bbo/jrfib5xxgagza5giggzr/u
+  macdddress: aa_bb_cc_dd_ee_00
+  computername: aaa
+  softwareversion: V1.0.1
+  softwarename: broker_zhida_daapi
+  pricebrokerid: xxx
+  code_file: ../conf/code_list.csv
+  # 查询合约信息地址
+  login_address: https://con_sh1.directaccess.cn/account/login
+  query_addres: https://con_sh1.directaccess.cn/contract/getContract
