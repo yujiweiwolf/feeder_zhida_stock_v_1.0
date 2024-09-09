@@ -8,7 +8,7 @@ using co::Config;
 using co::DaapiServer;
 namespace po = boost::program_options;
 
-const char kVersion[] = "v1.0.10";
+const char kVersion[] = "v1.0.11";
 
 // 测试用
 void test_code() {

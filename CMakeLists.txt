@@ -26,20 +26,20 @@ foreach(child ${all_sub_index})
     list(APPEND all_lib ${ROOT_DIR}/${child}/lib)
 endforeach()
 
-SET(API_VERSION "DAAPI_v1.15")
+SET(API_VERSION "DAAPI_v2.1.0.1")
 
 include_directories(${CMAKE_CURRENT_LIST_DIR}/lib/${API_VERSION}/include)
 include_directories(${all_include})
 
-link_directories(${CMAKE_CURRENT_LIST_DIR}/lib/${API_VERSION}/Linux/gcc5.4.0-6 ${all_lib})
+link_directories(${CMAKE_CURRENT_LIST_DIR}/lib/${API_VERSION}/Linux/gcc7.5.0_centos7 ${all_lib})
 
-aux_source_directory (./src/ctp_feeder SRC_LIST)
+aux_source_directory (./src SRC_LIST)
 
 SET(FEEDER "zhida_stock_feeder")
 add_executable (${FEEDER} ${SRC_LIST})
 
 target_link_libraries(${FEEDER}
-        feeder coral swordfish x DAApi stdc++fs yaml-cpp clickhouse-cpp-lib-static boost_date_time boost_filesystem boost_regex boost_system  boost_chrono boost_log boost_program_options boost_thread boost_iostreams z protobuf protobuf-lite sodium zmq ssl crypto iconv pthread dl)
+        feeder coral swordfish x DAMarketApi stdc++fs yaml-cpp clickhouse-cpp-lib-static boost_date_time boost_filesystem boost_regex boost_system  boost_chrono boost_log boost_program_options boost_thread boost_iostreams boost_coroutine z protobuf protobuf-lite sodium zmq ssl crypto iconv pthread dl)
 
 
 FILE(COPY Dockerfile image.sh DESTINATION ${CMAKE_CURRENT_BINARY_DIR})

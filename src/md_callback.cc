@@ -220,21 +220,42 @@ namespace co {
     }
 
     void MDCallBack::OnRtnMarketData(CMarketRtnMarketDataField *pRtnMarketData) {
-//        if (strcmp(pRtnMarketData->TreatyCode, "09988.HK") == 0) {
-//            LOG_INFO << pRtnMarketData->TreatyCode
-//                     << ", " << pRtnMarketData->ExchangeCode
-//                     << ", Open: " << pRtnMarketData->Open
-//                     << ", CurrPrice: " << pRtnMarketData->CurrPrice
-//                     << ", CurrNumber: " << pRtnMarketData->CurrNumber
-//                     << ", FilledNum: " << pRtnMarketData->FilledNum
-//                     << ", BuyPrice: " << pRtnMarketData->BuyPrice
-//                     << ", BuyNumber: " << pRtnMarketData->BuyNumber
-//                     << ", SalePrice: " << pRtnMarketData->SalePrice
-//                     << ", SaleNumber: " << pRtnMarketData->SaleNumber
-//                     << ", IntradaySettlePrice: " << pRtnMarketData->IntradaySettlePrice
-//                     << ", TradeDay: " << pRtnMarketData->TradeDay
-//                     << ", Time: " << pRtnMarketData->Time;
-//        }
+        if (strcmp(pRtnMarketData->TreatyCode, "09988.HK") == 0) {
+            LOG_INFO << pRtnMarketData->TreatyCode
+                     << ", " << pRtnMarketData->ExchangeCode
+                     << ", Time: " << pRtnMarketData->Time
+                     << ", Open: " << pRtnMarketData->Open
+                     << ", CurrPrice: " << pRtnMarketData->CurrPrice
+                     << ", CurrNumber: " << pRtnMarketData->CurrNumber
+                     << ", FilledNum: " << pRtnMarketData->FilledNum
+                     << ", BuyPrice: " << pRtnMarketData->BuyPrice
+                     << ", " << pRtnMarketData->BuyPrice2
+                     << ", " << pRtnMarketData->BuyPrice3
+                     << ", " << pRtnMarketData->BuyPrice4
+                     << ", " << pRtnMarketData->BuyPrice5
+                     << ", BuyNumber: " << pRtnMarketData->BuyNumber
+                     << ", " << pRtnMarketData->BuyNumber2
+                     << ", " << pRtnMarketData->BuyNumber3
+                     << ", " << pRtnMarketData->BuyNumber4
+                     << ", " << pRtnMarketData->BuyNumber5
+                     << ", SalePrice: " << pRtnMarketData->SalePrice
+                     << ", " << pRtnMarketData->SalePrice2
+                     << ", " << pRtnMarketData->SalePrice3
+                     << ", " << pRtnMarketData->SalePrice4
+                     << ", " << pRtnMarketData->SalePrice5
+                     << ", SaleNumber: " << pRtnMarketData->SaleNumber
+                     << ", " << pRtnMarketData->SaleNumber2
+                     << ", " << pRtnMarketData->SaleNumber3
+                     << ", " << pRtnMarketData->SaleNumber4
+                     << ", " << pRtnMarketData->SaleNumber5
+                     << ", IntradaySettlePrice: " << pRtnMarketData->IntradaySettlePrice
+                     << ", PreSettlementPrice: " << pRtnMarketData->PreSettlementPrice
+                     << ", Close: " << pRtnMarketData->Close;
+        }
+        double pre_close = atof(pRtnMarketData->PreSettlementPrice);
+        if (pre_close < MINPRICE) {
+            return;
+        }
 
         string code = x::Trim(pRtnMarketData->TreatyCode);
         QContextPtr ctx = QServer::Instance()->GetContext(code);
@@ -449,14 +470,9 @@ namespace co {
         }
         m.status = kStateOK;
         string _line = ctx->FinishQTick();
-//        if (strcmp(pRtnMarketData->TreatyCode, "09988.HK") == 0) {
-//            LOG_INFO << pRtnMarketData->TreatyCode
-//                     << ", new_volume: " << m.new_volume
-//                     << ", sum_volume: " << m.sum_volume
-//                     << ", new_price: " << m.new_price
-//                     << ", new_amount: " << m.new_amount
-//                     << ", sum_amount: " << m.sum_amount;
-//        }
+        if (strcmp(pRtnMarketData->TreatyCode, "09988.HK") == 0) {
+            LOG_INFO << ToString(m);
+        }
         QServer::Instance()->PushQTick(_line);
     }
 }  // namespace co
